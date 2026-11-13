@@ -97,8 +97,8 @@ form.addEventListener('submit',function(e){
     if(!r.ok||String(d.success)!=='true') throw new Error(d.message);
     msg.textContent='Thank you. Your enquiry has been sent and we will reply shortly.';
     form.reset();
-  });}).catch(function(){
-    msg.textContent='Sorry, your message could not be sent. Please email Jerome@ezzemarine.co directly.';
+  });}).catch(function(err){
+    msg.textContent='Sorry, your message could not be sent. Please email Jerome@ezzemarine.co directly.'+(err&&err.message?' ('+err.message+')':'');
   }).finally(function(){btn.disabled=false;});
 });
 </script>
