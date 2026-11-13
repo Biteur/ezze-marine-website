@@ -36,11 +36,15 @@
 
   <section>
     <div class="wrap about">
-      <form id="qf">
+      <form id="qf" action="https://formsubmit.co/Jerome@ezzemarine.co" method="POST">
+        <input type="hidden" name="_cc" value="Jeremy@ezzemarine.co">
+        <input type="hidden" name="_subject" value="New enquiry from the Ezze Marine website">
+        <input type="hidden" name="_template" value="table">
+        <input type="text" name="_honey" tabindex="-1" autocomplete="off" hidden>
         <label>Name<input name="name" required autocomplete="name"></label>
         <label>Email<input type="email" name="email" required autocomplete="email"></label>
         <label>What do you need
-          <select name="cat">
+          <select name="enquiry">
             <option>Introduce a project</option>
             <option>Quotation: tool sale or rental</option>
             <option>Quotation: personnel supply</option>
@@ -78,9 +82,24 @@
 </footer>
 
 <script>
-document.getElementById('qf').addEventListener('submit',function(e){
+// Sends through FormSubmit's AJAX endpoint so visitors stay on the page; without JS the form posts normally.
+var form=document.getElementById('qf'), msg=document.getElementById('msg'), btn=form.querySelector('button');
+form.addEventListener('submit',function(e){
   e.preventDefault();
-  document.getElementById('msg').textContent='Thanks. This demo form does not send yet, so connect it to your email or form service before launch.';
+  if(form._honey.value) return;
+  btn.disabled=true;
+  msg.textContent='Sending…';
+  fetch('https://formsubmit.co/ajax/Jerome@ezzemarine.co',{
+    method:'POST',
+    headers:{'Content-Type':'application/json','Accept':'application/json'},
+    body:JSON.stringify(Object.fromEntries(new FormData(form)))
+  }).then(function(r){return r.json().then(function(d){
+    if(!r.ok||String(d.success)!=='true') throw new Error(d.message);
+    msg.textContent='Thank you. Your enquiry has been sent and we will reply shortly.';
+    form.reset();
+  });}).catch(function(){
+    msg.textContent='Sorry, your message could not be sent. Please email Jerome@ezzemarine.co directly.';
+  }).finally(function(){btn.disabled=false;});
 });
 </script>
 </body>
