@@ -85,21 +85,23 @@
 <script>
 // Sends through FormSubmit's AJAX endpoint so visitors stay on the page; without JS the form posts normally.
 var form=document.getElementById('qf'), msg=document.getElementById('msg'), btn=form.querySelector('button');
+// Each status message goes in a fresh span so it fades in (see #msg span in styles.css).
+function say(t){var el=document.createElement('span');el.textContent=t;msg.replaceChildren(el);}
 form.addEventListener('submit',function(e){
   e.preventDefault();
   if(form._honey.value) return;
   btn.disabled=true;
-  msg.textContent='Sending…';
+  say('Sending…');
   fetch('https://formsubmit.co/ajax/788ff21b88a4510d727e75a6ea9c7087',{
     method:'POST',
     headers:{'Content-Type':'application/json','Accept':'application/json'},
     body:JSON.stringify(Object.fromEntries(new FormData(form)))
   }).then(function(r){return r.json().then(function(d){
     if(!r.ok||String(d.success)!=='true') throw new Error(d.message);
-    msg.textContent='Thank you. Your enquiry has been sent and we will reply shortly.';
+    say('Thank you. Your enquiry has been sent and we will reply shortly.');
     form.reset();
   });}).catch(function(err){
-    msg.textContent='Sorry, your message could not be sent. Please email Jerome@ezzemarine.co directly.'+(err&&err.message?' ('+err.message+')':'');
+    say('Sorry, your message could not be sent. Please email Jerome@ezzemarine.co directly.'+(err&&err.message?' ('+err.message+')':''));
   }).finally(function(){btn.disabled=false;});
 });
 </script>
