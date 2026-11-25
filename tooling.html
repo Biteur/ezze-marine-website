@@ -29,9 +29,15 @@
 
 <main>
   <div class="pagehead">
-    <div class="wrap">
-      <h1>Specialised subsea tooling</h1>
-      <p>Design, manufacture and sales. Not every problem is best solved by conventional methods. Purpose-built tools reduce operational time, improve safety and deliver cost savings without compromising quality or performance.</p>
+    <div class="wrap split">
+      <div>
+        <h1>Specialised subsea tooling</h1>
+        <p>Design, manufacture and sales. Not every problem is best solved by conventional methods. Purpose-built tools reduce operational time, improve safety and deliver cost savings without compromising quality or performance.</p>
+      </div>
+      <figure>
+        <video id="fab" src="videos/tooling-fabrication.mp4" poster="videos/tooling-fabrication.jpg" width="540" height="960" autoplay muted loop playsinline preload="metadata" aria-label="CNC machining of a subsea tool component"></video>
+        <figcaption>Tool fabrication in progress</figcaption>
+      </figure>
     </div>
   </div>
 
@@ -91,5 +97,9 @@
     <span>160 Robinson Road, #14-04, Singapore Business Federation Center, Singapore 068914</span>
   </div>
 </footer>
+<script>
+// Respect reduced-motion: stop the looping video and give the visitor play controls instead.
+if(matchMedia('(prefers-reduced-motion: reduce)').matches){var v=document.getElementById('fab');v.pause();v.removeAttribute('autoplay');v.controls=true;}
+</script>
 </body>
 </html>
