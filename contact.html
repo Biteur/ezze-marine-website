@@ -62,12 +62,10 @@
       <div class="people">
         <div>
           <h3>Jeremy Dinkelmann</h3>
-          <p><a href="mailto:Jeremy@ezzemarine.co">Jeremy@ezzemarine.co</a></p>
           <p><a href="tel:+447853676867">+44 (0)7853 676867</a></p>
         </div>
         <div>
           <h3>Jerome Pawlak</h3>
-          <p><a href="mailto:Jerome@ezzemarine.co">Jerome@ezzemarine.co</a></p>
           <p><a href="tel:+66909965359">+66 (0)90 996 5359</a></p>
         </div>
       </div>
@@ -101,7 +99,7 @@ form.addEventListener('submit',function(e){
     say('Thank you. Your enquiry has been sent and we will reply shortly.');
     form.reset();
   });}).catch(function(err){
-    say('Sorry, your message could not be sent. Please email Jerome@ezzemarine.co directly.'+(err&&err.message?' ('+err.message+')':''));
+    say('Sorry, your message could not be sent. Please try again later or call us on one of the numbers listed.'+(err&&err.message?' ('+err.message+')':''));
   }).finally(function(){btn.disabled=false;});
 });
 </script>
