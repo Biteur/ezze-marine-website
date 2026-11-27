@@ -143,11 +143,6 @@ figcaption{color:var(--muted);font-size:.9rem;margin-top:.5rem}
 .facts{display:grid;grid-template-columns:auto 1fr;gap:.5rem 1.25rem;margin:1.5rem 0 0;padding-top:1.25rem;border-top:1px solid var(--line)}
 .facts dt{color:var(--muted)}
 .facts dd{margin:0}
-.people{display:grid;gap:1.5rem;align-content:start}
-.people div{border-top:3px solid var(--accent);padding-top:1rem}
-.people h3{font-size:1.25rem;margin-bottom:.25rem}
-.people p{margin:0}
-.people a{color:var(--accent);font-weight:600}
 form{display:grid;gap:1rem;max-width:36rem}
 label{display:grid;gap:.25rem;font-weight:600}
 input,select,textarea{font:inherit;padding:.75rem;border:1px solid var(--line);border-radius:.25rem;background:var(--panel);color:var(--fg)}
