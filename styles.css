@@ -154,6 +154,9 @@ footer{background:var(--hero-bg);color:var(--hero-muted);padding:2.5rem 0}
 footer .wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(13rem,1fr));gap:1rem 2rem;align-items:start}
 footer .fcontact{line-height:1.7}
 footer a[href^="tel:"]{white-space:nowrap}
+footer .ic{white-space:nowrap}
+footer .fcontact .ic{display:block;width:max-content}
+footer .ic svg{width:1em;height:1em;fill:currentColor;vertical-align:-.15em;margin-right:.4em}
 footer a{color:var(--hero-fg)}
 @media (max-width:52rem){
   .hero .wrap,.about{grid-template-columns:1fr}
