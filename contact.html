@@ -41,6 +41,7 @@
         <input type="hidden" name="_cc" value="Jeremy@ezzemarine.co">
         <input type="hidden" name="_subject" value="New enquiry from the Ezze Marine website">
         <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_next" value="https://ezzemarine.co/thanks.html">
         <input type="hidden" name="_autoresponse" value="Thank you for contacting Ezze Marine.&#10;&#10;We have received your enquiry and a member of our team will reply within 2 working days. If your request is urgent, please call Jeremy Dinkelmann on +44 (0)7853 676867 or Jerome Pawlak on +66 (0)90 996 5359.&#10;&#10;Ezze Marine Pte Ltd&#10;160 Robinson Road, #14-04, Singapore Business Federation Center, Singapore 068914&#10;https://ezzemarine.co">
         <input type="text" name="_honey" tabindex="-1" autocomplete="off" hidden>
         <label>Name<input name="name" required autocomplete="name"></label>
@@ -82,27 +83,15 @@
 </footer>
 
 <script>
-// Sends through FormSubmit's AJAX endpoint so visitors stay on the page; without JS the form posts normally.
+// The form posts normally (not AJAX) because FormSubmit only sends the _autoresponse email for regular submissions.
+// FormSubmit shows a short robot check, then returns the visitor to thanks.html (the _next field).
 var form=document.getElementById('qf'), msg=document.getElementById('msg'), btn=form.querySelector('button');
-// Each status message goes in a fresh span so it fades in (see #msg span in styles.css).
-function say(t){var el=document.createElement('span');el.textContent=t;msg.replaceChildren(el);}
-form.addEventListener('submit',function(e){
-  e.preventDefault();
-  if(form._honey.value) return;
+form.addEventListener('submit',function(){
   btn.disabled=true;
-  say('Sending…');
-  fetch('https://formsubmit.co/ajax/788ff21b88a4510d727e75a6ea9c7087',{
-    method:'POST',
-    headers:{'Content-Type':'application/json','Accept':'application/json'},
-    body:JSON.stringify(Object.fromEntries(new FormData(form)))
-  }).then(function(r){return r.json().then(function(d){
-    if(!r.ok||String(d.success)!=='true') throw new Error(d.message);
-    say('Thank you. Your enquiry has been sent and we will reply shortly.');
-    form.reset();
-  });}).catch(function(err){
-    say('Sorry, your message could not be sent. Please try again later or call us on one of the numbers listed.'+(err&&err.message?' ('+err.message+')':''));
-  }).finally(function(){btn.disabled=false;});
+  var el=document.createElement('span');el.textContent='Sending…';msg.replaceChildren(el);
 });
+// If the visitor comes back with the browser's Back button, re-enable the button.
+addEventListener('pageshow',function(){btn.disabled=false;msg.replaceChildren();});
 </script>
 </body>
 </html>
